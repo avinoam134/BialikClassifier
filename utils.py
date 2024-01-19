@@ -12,7 +12,7 @@ def countWords(all):
   sentences = all['sentences']
   for sentenc in sentences :
     for word in sentenc['tokens']:
-      if not(word['text'] in ['.', ',', ';', '"' , '-', "?" ,'!',':']):
+      if not(word['text'] in ['.', ',', ';', '"' , '-', "?" ,'!',':','\n']):
         count = count+1
   return count
 
@@ -26,10 +26,43 @@ def avrWordInParagraph(all):
   numParagraphs = countParagraphs(all)
   return numWords/numParagraphs
 
-# def countVerbWord(word):
+def countVerbWord(word):
+  count = 0
+  if 'expanded' in word:
+    for partWord in word['expanded']:
+      count = count + countVerbWord(partWord)
+  elif 'upos' in word:
+    if word['upos'] == 'VERB':
+      count = count +1
+  return count
 
-# def countVerbText(all):
-#   count = 0
-#   sentences = all['sentences']
-#   for sentenc in sentences :
-#     for word in sentenc['tokens']:
+
+def countVerbText(all):
+  count = 0
+  sentences = all['sentences']
+  for sentenc in sentences :
+    for word in sentenc['tokens']:
+      count = count + countVerbWord(word)
+  return count
+
+def countFirstUposForSentences(all):
+  result = {}
+  sentences = all['sentences']
+  for sentenc in sentences :
+    firstWord = sentenc['tokens'][0]
+    if 'upos' in firstWord:
+      type = firstWord['upos']
+      if type in result:
+        result[type] = result[type] + 1
+      else:
+         result[type] = 1
+    else:
+      if 'expanded' in firstWord:
+        if 'upos' in firstWord['expanded'][0]:
+          type = firstWord['expanded'][0]['upos']
+          if type in result:
+            result[type] = result[type] + 1
+          else:
+            result[type] = 1
+  return result
+
