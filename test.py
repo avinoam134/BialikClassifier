@@ -20,7 +20,7 @@ def analyse_poem(poem):
     result['histogram oe the words in the text'] = utils.countWordAppirence(all)
     result['number of verb nouns in the text'] = utils.countPartOfSpeechText(all ,'NOUN')
     result['average number of words in sentenc'] = utils.avrWordInSentenc(all)
-    result['average number of words in paragrph'] = utils.countParagraphs(all)
+    result['average number of words in paragrph'] = utils.avrWordInParagraph(all)
     result['number of verb punctuation in the text'] = utils.countPartOfSpeechText(all,'PUNCT')
     return result
 
