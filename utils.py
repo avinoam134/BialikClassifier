@@ -45,6 +45,7 @@ def countVerbText(all):
       count = count + countVerbWord(word)
   return count
 
+# check for sentences in what part of speech it strat and return a dic thar summarize the result 
 def countFirstUposForSentences(all):
   result = {}
   sentences = all['sentences']
@@ -66,3 +67,33 @@ def countFirstUposForSentences(all):
             result[type] = 1
   return result
 
+def countPartOfSpeechWord(word ,PartOfSpeech):
+  count = 0
+  if 'expanded' in word:
+    for partWord in word['expanded']:
+      count = count + countVerbWord(partWord)
+  elif 'upos' in word:
+    if word['upos'] == PartOfSpeech:
+      count = count +1
+  return count
+
+
+def countPartOfSpeechText(all , PartOfSpeech):
+  count = 0
+  sentences = all['sentences']
+  for sentenc in sentences :
+    for word in sentenc['tokens']:
+      count = count + countPartOfSpeechWord(word , PartOfSpeech)
+  return count
+
+def countWordAppirence(all):
+  result = {}
+  sentences = all['sentences']
+  for sentenc in sentences :
+    for word in sentenc['tokens']:
+      text = word['text']
+      if text in result:
+        result[text] = result[text] + 1
+      else:
+        result[text] = 1
+  return result
