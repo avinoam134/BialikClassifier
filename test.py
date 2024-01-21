@@ -5,7 +5,7 @@ import utils as utils
 
 p = Pipeline("hebrew")
 
-def anlayse_poem(poem):
+def analyse_poem(poem):
     result = {}
     all = p(poem['content'])
     result['name'] = poem['poem']
@@ -30,7 +30,7 @@ def anlayse_poem(poem):
 def main():
     data = parser.data
     print(data[0])
-    ans = anlayse_poem(data[0])
+    ans = analyse_poem(data[0])
     for x in ans.keys():
         print("key: " + x + '\n' + "val : " + str(ans[x]) + '\n')
 
