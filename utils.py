@@ -2,7 +2,7 @@
 
 def countParagraphs(all):
   substring = "\n\n\n"
-  return all['text'].count(substring)
+  return all['text'].count(substring) +1
 
 def countSentences(all):
   return len(all['sentences'])
