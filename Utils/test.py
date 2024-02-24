@@ -1,6 +1,6 @@
 from trankit import Pipeline
 from Poems import poems_parser as parser
-import utils as utils
+import Utils.utils as utils
 
 
 p = Pipeline("hebrew")

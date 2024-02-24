@@ -1,6 +1,6 @@
 import json
 
-POEMS_PATH = "./Poems/Poems_Unparsed.JSON"
+POEMS_PATH = "/../Poems_And_Outputs/Poems_Unparsed.JSON"
 
 def parse_poems(file_path = POEMS_PATH, encoding='utf-8'):
     with open(file_path, "r", encoding=encoding) as file:
